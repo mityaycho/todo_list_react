@@ -39,16 +39,8 @@ class App extends React.Component {
   };
 
   changeTaskStatus = (task, isDone) => {
-    let newTasks = this.state.tasks.map(el => {
-      if (el !== task) {
-        return el;
-      } else {
-        return {...el, isDone: isDone};
-      };
-    });
-    this.setState({
-      tasks: newTasks
-    });
+    let newTasks = this.state.tasks.map(el => el !== task ? el : {...el, isDone: isDone});
+    this.setState({ tasks: newTasks });
   }
 
   render = () => {
