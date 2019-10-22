@@ -27,21 +27,19 @@ class App extends React.Component {
       isDone: false
     };
     let newTasks = [...this.state.tasks, newTask];
-    this.setState({
-      tasks: newTasks
-    })
+    this.setState({tasks: newTasks});
   };
 
   changeFilter = (newFilterValue) => {
     this.setState({
       filterValue: newFilterValue
-    })
+    });
   };
 
   changeTaskStatus = (task, isDone) => {
     let newTasks = this.state.tasks.map(el => el !== task ? el : {...el, isDone: isDone});
     this.setState({ tasks: newTasks });
-  }
+  };
 
   render = () => {
     return (
@@ -59,14 +57,13 @@ class App extends React.Component {
               case "Completed":
                 return el.isDone;
             }
-          })}
-          />
-          <TodoListFooter filterValue={this.state.filterValue} onChangeFilter={this.changeFilter}/>
+          })} />
+          <TodoListFooter filterValue={this.state.filterValue} onChangeFilter={this.changeFilter} />
         </div>
       </div>
     );
-  }
-}
+  };
+};
 
 export default App;
 
