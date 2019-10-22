@@ -31,9 +31,7 @@ class App extends React.Component {
   };
 
   changeFilter = (newFilterValue) => {
-    this.setState({
-      filterValue: newFilterValue
-    });
+    this.setState({filterValue: newFilterValue});
   };
 
   changeTaskStatus = (task, isDone) => {
