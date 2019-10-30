@@ -2,39 +2,51 @@ import React from 'react';
 import './App.css';
 
 class TodoListHeader extends React.Component {
-
   state = {
     error: false,
     title: ""
   }
 
   onAddTaskClick = () => {
-    if (this.state.title === "") {
-      this.setState({error: true})
+    let newText = this.state.title;
+    this.setState({title: ""});
+
+    if (newText === "") {
+      this.setState({error: true});
     } else {
+      this.setState({error: false});
       // передаём новый текст наружу
-      this.props.onTaskAdded(this.state.title);
-      this.setState({error: false, title: ""});
+      this.props.addTask(newText);
     }
   }
 
-  onChange = (event) => this.setState({error: false, title: event.target.value})
+  onTitleChanged = (e) => {
+    this.setState({
+      error: false,
+      title: e.currentTarget.value
+    });
+  }
 
-  keyPress = (event) => event.key === "Enter" ? this.onAddTaskClick() : null;
+  onKeyPress = (e) => {
+    if (e.key === "Enter") {
+      this.onAddTaskClick()
+    }
+  }
+
 
   render = () => {
-    let inputClassName = this.state.error ? "error" : "";
+    let classNameForInput = this.state.error ? "error" : "";
+
     return (
       <div className="todoList-header">
         <h3 className="todoList-header__title">What to Learn</h3>
         <div className="todoList-newTaskForm">
-          <input type="text"
-                 placeholder="New task name"
-                 className={inputClassName}
-                 onChange={event => this.onChange(event)}
-                 onKeyPress={this.keyPress}
-                 value={this.state.title}/>
-          <button onClick={ this.onAddTaskClick }>Add</button>
+          <input className={classNameForInput} type="text" placeholder="New task name"
+                 onChange={this.onTitleChanged}
+                 onKeyPress={this.onKeyPress}
+                 value={this.state.title}
+          />
+          <button onClick={this.onAddTaskClick}>Add</button>
         </div>
       </div>
     );
