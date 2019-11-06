@@ -1,111 +1,68 @@
 import React from 'react';
-import './App.css';
-import TodoListHeader from "./TodoListHeader";
-import TodoListTasks from "./TodoListTasks";
-import TodoListFooter from "./TodoListFooter";
+import TodoList from "./TodoList";
+import AddNewItemForm from "./AddNewItemForm";
 
 class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.newTasksTitileRef = React.createRef();
-  }
-
   state = {
-    tasks: [
-      {id: 0, title: "JS", isDone: true, priority: "medium"},
-      {id: 1, title: "HTML", isDone: true, priority: "low"},
-      {id: 2, title: "CSS", isDone: true, priority: "low"},
-      {id: 3, title: "ReactJS", isDone: false, priority: "high"}
-    ],
-    filterValue: "All"
-  };
-  nextTaskId = 4;
-
-  saveState = () => {
-    let stateAsString = JSON.stringify(this.state);
-    localStorage.setItem("our-state", stateAsString);
+    todolists: []
   };
 
-  restoreState = () => {
-    let state = this.state;
-    let stateAsString = localStorage.getItem("our-state");
-    if (stateAsString != null) {
-      state = JSON.parse(stateAsString);
+  nextTodoListId = 0;
+
+    componentDidMount() {
+        this.restoreState();
     }
-    this.setState(state, () => this.state.tasks.forEach(el => {
-      if (el.id >= this.nextTaskId) {
-        this.nextTaskId = el.id + 1;
-      };
-    }));
-  };
 
-  componentDidMount() {
-    this.restoreState();
-  };
+    saveState = () => {
+        let stateAsString = JSON.stringify(this.state);
+        localStorage.setItem("todolists", stateAsString);
+    }
 
-  addTask = (newText) => {
-    let newTask = {
-      id: this.nextTaskId,
-      title: newText,
-      isDone: false,
-      priority: "low"
-    };
-    this.nextTaskId++;
-    let newTasks = [...this.state.tasks, newTask];
-    this.setState({
-      tasks: newTasks
-    }, this.saveState);
+    restoreState = () => {
+        // объявляем наш стейт стартовый
+        let state = {
+            todolists: []
+        };
+
+        let stateAsString = localStorage.getItem("todolists");
+        if (stateAsString != null) {
+            state = JSON.parse(stateAsString);
+        }
+        this.setState(state, () => {
+            this.state.todolists.forEach(t => {
+                if (t.id >= this.nextTodoListId) {
+                    this.nextTodoListId = t.id + 1;
+                }
+            })
+        }, this.saveState);
+    }
+
+  addTodoList = (title) => {
+      let newTodoList = {
+          id: this.nextTodoListId,
+          title: title
+      }
+      this.nextTodoListId++;
+      let newTodoLists = [...this.state.todolists, newTodoList];
+      this.setState({todolists: newTodoLists}, this.saveState);
   }
 
-  changeFilter = (newFilterValue) => {
-    this.setState({
-      filterValue: newFilterValue
-    }, this.saveState);
-  }
 
-  changeStatus = (taskId, isDone) => {
-    this.changeTask(taskId, {isDone});
-  };
 
-  changeTitle = (taskId, newTitle) => {
-    this.changeTask(taskId, {title: newTitle});
-  };
-
-  changeTask = (taskId, newPropsObj) => {
-    let newTasks = this.state.tasks.map(el => {
-      if (el.id != taskId) {
-        return el;
-      } else {
-        return {...el, ...newPropsObj};
-      };
-    });
-    this.setState({tasks: newTasks}, this.saveState);
-  };
-
-  render = () => {
-
+  render() {
+    const todolists = this.state.todolists.map(el => <TodoList id={el.id} title={el.title}/>)
     return (
-      <div className="App">
-        <div className="todoList">
-          <TodoListHeader addTask={this.addTask}/>
-          <TodoListTasks changeStatus={this.changeStatus}
-                         changeTitle={this.changeTitle}
-                         tasks={this.state.tasks.filter(t => {
-                           if (this.state.filterValue === "All") {
-                             return true;
-                           }
-                           if (this.state.filterValue === "Active") {
-                             return t.isDone === false;
-                           }
-                           if (this.state.filterValue === "Completed") {
-                             return t.isDone === true;
-                           }
-                         })}/>
-          <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue}/>
+      <div>
+          <AddNewItemForm addItem={this.addTodoList} />
+        {/*<div>*/}
+        {/*  <input type="text"/>*/}
+        {/*  <button onClick={this.addTodolist}>Add</button>*/}
+        {/*</div>*/}
+        <div className="App">
+          {todolists}
         </div>
       </div>
-    );
+    )
   }
 }
 
