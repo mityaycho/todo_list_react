@@ -10,7 +10,7 @@ class App extends React.Component {
     super(props)
   }
 
-  nextTodoListId = 0;
+  nextTodoListId = 3;
 
   // state = {
   //     todolists: []

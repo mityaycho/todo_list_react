@@ -58,7 +58,7 @@ class TodoList extends React.Component {
             isDone: false,
             priority: "low"
         };
-        this.props.addTask(newTask, this.nextTaskId)
+        this.props.addTask(newTask, this.props.id)
         // let newTasks = [...this.state.tasks, newTask];
         // инкрементим (увеличим) id следующей таски, чтобы при следюущем добавлении, он был на 1 больше
         this.nextTaskId++;
@@ -70,12 +70,11 @@ class TodoList extends React.Component {
     changeFilter = (newFilterValue) => {
         this.setState( {
             filterValue: newFilterValue
-        }, () => { this.saveState(); });
+        });
     }
 
     changeTask = (taskId, obj) => {
-        debugger
-        let newTasks = this.state.tasks.map(t => {
+        let newTasks = this.props.tasks.map(t => {
             if (t.id != taskId) {
                 return t;
             }
@@ -99,7 +98,7 @@ class TodoList extends React.Component {
 
         return (
 
-                <div className="todoList">
+                <div className="todoList" id={this.props.id}>
                     <div className="todoList-header">
                             <TodoListTitle title={this.props.title}/>
                             <AddNewItemForm addItem={this.addTask} />
