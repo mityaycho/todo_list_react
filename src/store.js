@@ -25,6 +25,16 @@ const reducer = (state = initialState, action) => {
           }
         })
       };
+    case "CHANGE_TASK_STATUS":
+      return {
+        ...state,
+        tasks: state.tasks.map((todo) => {
+          if (todo.id === action.todolistId) {
+            return {...todo, isDone: action.isDone}
+          }
+          return todo
+        })
+      }
     default:
       return state;
   }
