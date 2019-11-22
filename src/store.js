@@ -13,7 +13,7 @@ const reducer = (state = initialState, action) => {
     case "ADD_TODOLIST":
       return {
         ...state, todolists: [...state.todolists, action.newTodoList]
-      }
+      };
     case "ADD_TASK":
       return {
         ...state,
@@ -24,7 +24,7 @@ const reducer = (state = initialState, action) => {
             return todo
           }
         })
-      }
+      };
     default:
       return state;
   }
