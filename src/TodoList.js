@@ -133,6 +133,14 @@ const mapDispatchToProps = (dispatch) => {
                 todolistId
             };
             dispatch(action);
+        },
+        changeTaskStatus: (todolistId, isDone) => {
+            const action = {
+                type: "CHANGE_TASK_STATUS",
+                todolistId,
+                isDone
+            };
+            dispatch(action);
         }
     };
 };
