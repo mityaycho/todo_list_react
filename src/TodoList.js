@@ -5,49 +5,51 @@ import TodoListFooter from "./TodoListFooter";
 import TodoListTitle from "./TodoListTitle";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
+import {addTaskAC, deleteTaskAC, deleteTodolistAC, updateTaskAC} from "./reducer";
 
 class TodoList extends React.Component {
 
     constructor(props) {
         super(props);
-        // this.newTasksTitileRef = React.createRef();
+        this.newTasksTitileRef = React.createRef();
 
     }
 
-    // componentDidMount() {
-    //     this.restoreState();
-    // }
+    componentDidMount() {
+        this.restoreState();
+    }
 
-    // saveState = () => {
-    //     // переводим объект в строку
-    //     let stateAsString = JSON.stringify(this.state);
-    //     // сохраняем нашу строку в localStorage под ключом "our-state"
-    //     localStorage.setItem("our-state-" + this.props.id, stateAsString);
-    // }
+    saveState = () => {
+        // переводим объект в строку
+        let stateAsString = JSON.stringify(this.state);
+        // сохраняем нашу строку в localStorage под ключом "our-state"
+        localStorage.setItem("our-state-" + this.props.id, stateAsString);
+    }
 
-    // restoreState = () => {
-    //     // объявляем наш стейт стартовый
-    //     let state = this.state;
-    //     // считываем сохранённую ранее строку из localStorage
-    //     let stateAsString = localStorage.getItem("our-state-" + this.props.id);
-    //     // а вдруг ещё не было ни одного сохранения?? тогда будет null.
-    //     // если не null, тогда превращаем строку в объект
-    //     if (stateAsString != null) {
-    //         state = JSON.parse(stateAsString);
-    //     }
-    //     // устанавливаем стейт (либо пустой, либо восстановленный) в стейт
-    //     this.setState(state, () => {
-    //         this.state.tasks.forEach(t => {
-    //             if (t.id >= this.nextTaskId) {
-    //                 this.nextTaskId = t.id + 1;
-    //             }
-    //         })
-    //     });
-    // }
+    restoreState = () => {
+        // объявляем наш стейт стартовый
+        let state = this.state;
+        // считываем сохранённую ранее строку из localStorage
+        let stateAsString = localStorage.getItem("our-state-" + this.props.id);
+        // а вдруг ещё не было ни одного сохранения?? тогда будет null.
+        // если не null, тогда превращаем строку в объект
+        if (stateAsString != null) {
+            state = JSON.parse(stateAsString);
+        }
+        // устанавливаем стейт (либо пустой, либо восстановленный) в стейт
+        this.setState(state, () => {
+            this.state.tasks.forEach(t => {
+                if (t.id >= this.nextTaskId) {
+                    this.nextTaskId = t.id + 1;
+                }
+            })
+        });
+    }
 
     nextTaskId = 0;
 
     state = {
+        tasks: [],
         filterValue: "All"
     };
 
@@ -58,23 +60,24 @@ class TodoList extends React.Component {
             isDone: false,
             priority: "low"
         };
-        this.props.addTask(newTask, this.props.id)
-        // let newTasks = [...this.state.tasks, newTask];
         // инкрементим (увеличим) id следующей таски, чтобы при следюущем добавлении, он был на 1 больше
         this.nextTaskId++;
-        // this.setState( {
-        //     tasks: newTasks
-        // }, () => { this.saveState(); });
+       /* let newTasks = [...this.state.tasks, newTask];
+        this.setState( {
+            tasks: newTasks
+        }, () => { this.saveState(); });*/
+       this.props.addTask(newTask, this.props.id);
+
     }
 
     changeFilter = (newFilterValue) => {
         this.setState( {
             filterValue: newFilterValue
-        });
+        }, () => { this.saveState(); });
     }
 
     changeTask = (taskId, obj) => {
-        let newTasks = this.props.tasks.map(t => {
+        let newTasks = this.state.tasks.map(t => {
             if (t.id != taskId) {
                 return t;
             }
@@ -83,29 +86,41 @@ class TodoList extends React.Component {
             }
         });
 
+        this.props.updateTask(taskId, obj, this.props.id);
+
         this.setState({
             tasks: newTasks
         }, () => { this.saveState(); });
     }
+
     changeStatus = (taskId, isDone) => {
         this.changeTask(taskId, {isDone: isDone});
     }
+
     changeTitle = (taskId, title) => {
         this.changeTask(taskId, {title: title});
     }
 
+    deleteTodolist = () => {
+        this.props.deleteTodolist(this.props.id);
+    }
+
+    deleteTask = (taskId) => {
+        this.props.deleteTask(taskId, this.props.id);
+    }
+
     render = () => {
-
         return (
-
-                <div className="todoList" id={this.props.id}>
+                <div className="todoList">
                     <div className="todoList-header">
-                            <TodoListTitle title={this.props.title}/>
+                            <TodoListTitle title={this.props.title} onDelete={this.deleteTodolist} />
                             <AddNewItemForm addItem={this.addTask} />
+
                     </div>
 
                     <TodoListTasks changeStatus={this.changeStatus }
                                    changeTitle={this.changeTitle }
+                                   deleteTask={this.deleteTask}
                                    tasks={this.props.tasks.filter(t => {
                         if (this.state.filterValue === "All") {
                             return true;
@@ -119,33 +134,32 @@ class TodoList extends React.Component {
                     })}/>
                     <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue} />
                 </div>
-
         );
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addTask: (newTask, todolistId) => {
-            const action = {
-                type: "ADD_TASK",
-                newTask,
-                todolistId
-            };
+        addTask(newTask, todolistId) {
+            const action = addTaskAC(newTask, todolistId);
             dispatch(action);
         },
-        changeTaskStatus: (todolistId, isDone) => {
-            const action = {
-                type: "CHANGE_TASK_STATUS",
-                todolistId,
-                isDone
-            };
+        updateTask(taskId, obj, todolistId) {
+            const action = updateTaskAC(taskId, obj, todolistId);
             dispatch(action);
+        },
+        deleteTodolist: (todolistId) => {
+            const action = deleteTodolistAC(todolistId);
+            dispatch(action)
+        },
+        deleteTask: (taskId, todolistId) => {
+            const action = deleteTaskAC(taskId, todolistId);
+            dispatch(action)
         }
-    };
-};
+    }
+}
 
-const ConnectedTodoList = connect(null, mapDispatchToProps)(TodoList);
+const ConnectedTodolist = connect(null, mapDispatchToProps)(TodoList);
 
-export default ConnectedTodoList;
+export default ConnectedTodolist;
 
