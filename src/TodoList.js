@@ -21,12 +21,12 @@ class TodoList extends React.Component {
         this.restoreState();
     }
 
-    saveState = () => {
-        // переводим объект в строку
-        let stateAsString = JSON.stringify(this.state);
-        // сохраняем нашу строку в localStorage под ключом "our-state"
-        localStorage.setItem("our-state-" + this.props.id, stateAsString);
-    }
+    // saveState = () => {
+    //     // переводим объект в строку
+    //     let stateAsString = JSON.stringify(this.state);
+    //     // сохраняем нашу строку в localStorage под ключом "our-state"
+    //     localStorage.setItem("our-state-" + this.props.id, stateAsString);
+    // }
 
     restoreState = () => {
         axios.get("https://social-network.samuraijs.com/api/1.0/todo-lists",
@@ -65,12 +65,12 @@ class TodoList extends React.Component {
     };
 
     addTask = (newText) => {
-        let newTask = {
-            id: this.nextTaskId,
-            title: newText,
-            isDone: false,
-            priority: "low"
-        };
+        // let newTask = {
+        //     id: this.nextTaskId,
+        //     title: newText,
+        //     isDone: false,
+        //     priority: "low"
+        // };
         // инкрементим (увеличим) id следующей таски, чтобы при следюущем добавлении, он был на 1 больше
         this.nextTaskId++;
        /* let newTasks = [...this.state.tasks, newTask];
@@ -84,14 +84,14 @@ class TodoList extends React.Component {
           {withCredentials: true, headers: {"API-KEY": "5ac078f7-4935-4223-bad6-63f58b80cd23"}})
           .then(res => {
               console.log(res.data);
-              this.props.addTask(newTask, this.props.id)
+              this.props.addTask(res.data.data.item, this.props.id)
           });
     }
 
     changeFilter = (newFilterValue) => {
         this.setState( {
             filterValue: newFilterValue
-        }, () => { this.saveState(); });
+        });
     }
 
     changeTask = (taskId, obj) => {
@@ -99,11 +99,11 @@ class TodoList extends React.Component {
     }
 
     changeStatus = (taskId, isDone) => {
-        this.changeTask(taskId, {isDone: isDone});
+        this.changeTask(taskId, {isDone});
     }
 
     changeTitle = (taskId, title) => {
-        this.changeTask(taskId, {title: title});
+        this.changeTask(taskId, {title});
     }
 
     deleteTodolist = () => {
