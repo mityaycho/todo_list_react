@@ -5,7 +5,7 @@ import TodoListFooter from "./TodoListFooter";
 import TodoListTitle from "./TodoListTitle";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
-import {addTaskAC, deleteTaskAC, deleteTodolistAC, setTodoListAC, updateTaskAC} from "./reducer";
+import {addTaskAC, deleteTaskAC, deleteTodolistAC, setTasksAC, setTodoListAC, updateTaskAC} from "./reducer";
 import axios from "axios";
 
 
@@ -33,7 +33,7 @@ class TodoList extends React.Component {
           {withCredentials: true})
           .then(res => {
               console.log(res.data);
-              this.props.setTodolists(res.data)
+              this.props.setTasks(res.data)
           });
     }
 
@@ -170,6 +170,10 @@ const mapDispatchToProps = (dispatch) => {
         },
         setTodolists: (totdolists) => {
             const action = setTodoListAC(totdolists);
+            dispatch(action);
+        },
+        setTasks: (totdolists) => {
+            const action = setTasksAC(totdolists);
             dispatch(action);
         }
     }
