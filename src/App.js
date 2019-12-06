@@ -3,7 +3,8 @@ import './App.css';
 import TodoList from "./TodoList";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
-import {addTodolistAC} from "./reducer";
+import {addTodolistAC, setTodoListAC} from "./reducer";
+import axios from "axios";
 
 class App extends React.Component {
 
@@ -15,17 +16,27 @@ class App extends React.Component {
 
     addTodoList = (title) => {
 
+        axios.post("https://social-network.samuraijs.com/api/1.0/todo-lists", {title},
+          {withCredentials: true, headers: {"API-KEY": "5ac078f7-4935-4223-bad6-63f58b80cd23"}})
+          .then(res => {
+              console.log(res.data);
+              this.props.addTodolist(res.data.data.item)
+          });
+
         let newTodoList = {
             id: this.nextTodoListId,
-            title: title,
-            tasks: []
+            title: title
         }
 
         this.props.addTodolist(newTodoList);/*
+
         this.setState({todolists: [...this.state.todolists, newTodoList]}, () => {
             this.saveState();
-        });*/
-        this.nextTodoListId++;
+        });
+
+        this.nextTodoListId++;*/
+
+
     }
 
     componentDidMount() {
@@ -41,6 +52,15 @@ class App extends React.Component {
     }
 
     restoreState = () => {
+        axios.get("https://social-network.samuraijs.com/api/1.0/todo-lists",
+          {withCredentials: true})
+          .then(res => {
+              console.log(res.data);
+              this.props.setTodolists(res.data)
+          });
+    }
+
+    __restoreState = () => {
         // объявляем наш стейт стартовый
         let state = this.state;
         // считываем сохранённую ранее строку из localStorage
@@ -89,8 +109,11 @@ const mapDispatchToProps = (dispatch) => {
         addTodolist: (newTodolist) => {
             const action = addTodolistAC(newTodolist);
             dispatch(action)
+        },
+        setTodolists: (totdolists) => {
+            const action = setTodoListAC(totdolists);
+            dispatch(action);
         }
-
     }
 }
 
