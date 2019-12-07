@@ -61,7 +61,7 @@ class TodoList extends React.Component {
 
     state = {
         tasks: [],
-        filterValue: 0
+        filterValue: "All"
     };
 
     addTask = (newText) => {
@@ -138,17 +138,17 @@ class TodoList extends React.Component {
                                    changeTitle={this.changeTitle }
                                    deleteTask={this.deleteTask}
                                    tasks={tasks.filter(t => {
-                        if (t.status === 0) {
+                        if (this.state.filterValue === "All") {
                             return true;
                         }
-                        if (t.status === 0) {
-                            return t.status === 0;
-                        }
-                        if (t.staus === 2) {
+                        if (this.state.filterValue === "Completed") {
                             return t.status === 2;
                         }
+                        if (this.state.filterValue === "Active") {
+                            return t.status === 0;
+                        }
                     })}/>
-                    <TodoListFooter changeFilter={this.changeFilter} status={status} />
+                    <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue} />
                 </div>
         );
     }

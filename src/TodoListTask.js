@@ -26,10 +26,10 @@ class TodoListTask extends React.Component {
     this.props.deleteTask(this.props.task.id);
   };
   render = () => {
-    let containerCssClass = this.props.task.isDone ? "todoList-task done" : "todoList-task";
+    let containerCssClass = this.props.task.status ? "todoList-task done" : "todoList-task";
     return (
       <div className={containerCssClass}>
-        <input type="checkbox" checked={this.props.task.isDone}
+        <input type="checkbox" checked={this.props.task.status}
                onChange={this.onIsDoneChanged}/>
         {this.state.editMode
           ? <input onBlur={this.deactivateEditMode} onChange={this.onTitleChanged} autoFocus={true}
