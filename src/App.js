@@ -36,7 +36,7 @@ class App extends React.Component {
         // this.nextTodoListId++;*/
 
 
-    }
+    };
 
     componentDidMount() {
         this.restoreState();
@@ -57,7 +57,7 @@ class App extends React.Component {
               console.log(res.data);
               this.props.setTodolists(res.data)
           });
-    }
+    };
 
     // __restoreState = () => {
     //     // объявляем наш стейт стартовый
@@ -101,7 +101,7 @@ const mapStateToProps = (state) => {
     return {
         todolists: state.todolists
     }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -114,7 +114,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(action);
         }
     }
-}
+};
 
 const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
 export default ConnectedApp;

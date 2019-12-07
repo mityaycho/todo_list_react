@@ -35,7 +35,7 @@ class TodoList extends React.Component {
               console.log(res.data);
               this.props.setTasks(res.data.items, this.props.id)
           });
-    }
+    };
 
     __restoreState = () => {
         // объявляем наш стейт стартовый
@@ -125,7 +125,6 @@ class TodoList extends React.Component {
 
     render = () => {
         let {tasks = []} = this.props;
-        let status = this.props.tasks.map(el => el.status)
         return (
                 <div className="todoList">
                     <div className="todoList-header">
