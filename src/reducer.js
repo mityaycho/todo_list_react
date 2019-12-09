@@ -80,18 +80,39 @@ const reducer = (state = initialState, action) => {
         })
       };
     case UPDATE_TASK:
-      return {
+
+      debugger
+      let newState = {
         ...state,
         todolists: state.todolists.map(tl => {
-          if (tl.id === action.todolistId) {
+          if (tl.id === action.task.todolistId) {
             return {
               ...tl,
               tasks: tl.tasks.map(t => {
-                if (t.id !== action.taskId) {
-                  console.log(action.isDone)
+                if (t.id !== action.task.id) {
                   return t;
                 } else {
-                  return {...t, status: action.isDone};
+                  return action.task;
+                }
+              })
+            }
+          } else {
+            return tl
+          }
+        })
+      };
+
+      return {
+        ...state,
+        todolists: state.todolists.map(tl => {
+          if (tl.id === action.task.todolistId) {
+            return {
+              ...tl,
+              tasks: tl.tasks.map(t => {
+                if (t.id !== action.task.id) {
+                  return t;
+                } else {
+                  return action.task;
                 }
               })
             }
@@ -106,7 +127,7 @@ const reducer = (state = initialState, action) => {
   }
 };
 
-export const updateTaskAC = (taskId, isDone, todolistId) => ({type: UPDATE_TASK, taskId, isDone, todolistId});
+export const updateTaskAC = (task) => ({type: UPDATE_TASK, task});
 export const deleteTodolistAC = (todolistId) => ({type: DELETE_TODOLIST, todolistId: todolistId});
 export const deleteTaskAC = (taskId, todolistId) => ({type: DELETE_TASK, taskId, todolistId});
 export const addTaskAC = (newTask, todolistId) => ({type: ADD_TASK, newTask, todolistId});

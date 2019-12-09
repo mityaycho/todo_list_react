@@ -93,16 +93,16 @@ class TodoList extends React.Component {
         });
     };
 
-    changeTask = (taskId, isDone) => {
-        this.props.updateTask(taskId, isDone, this.props.id);
+    changeTask = (task) => {
+        this.updateTask(task);
     };
 
-    changeStatus = (taskId, isDone) => {
-        this.changeTask(taskId, isDone);
+    changeStatus = (task) => {
+        this.changeTask(task);
     };
 
-    changeTitle = (taskId, title) => {
-        this.changeTask(taskId, {title});
+    changeTitle = (task) => {
+        this.updateTask(task);
     };
 
     deleteTodolist = () => {
@@ -111,6 +111,17 @@ class TodoList extends React.Component {
             .then(res => {
                 this.props.deleteTodolist(this.props.id)
             });
+        // this.props.deleteTodolist(this.props.id);
+    };
+
+    updateTask = (task) => {
+        axios.put("https://social-network.samuraijs.com/api/1.0/todo-lists/tasks/", task,
+          {withCredentials: true, headers: {"API-KEY": "5ac078f7-4935-4223-bad6-63f58b80cd23"}})
+          .then(res => {
+              debugger
+              return this.props.updateTask(res.data.data.item)
+
+          });
         // this.props.deleteTodolist(this.props.id);
     };
 
@@ -160,8 +171,8 @@ const mapDispatchToProps = (dispatch) => {
             //const action = addTaskAC(newTask, todolistId);
             dispatch(addTaskAC(newTask, todolistId));
         },
-        updateTask(taskId, isDone, todolistId) {
-            const action =  updateTaskAC(taskId, isDone, todolistId);
+        updateTask(task) {
+            const action =  updateTaskAC(task);
             dispatch(action);
         },
         deleteTodolist: (todolistId) => {
@@ -183,7 +194,12 @@ const mapDispatchToProps = (dispatch) => {
     }
 };
 
-const ConnectedTodolist = connect(null, mapDispatchToProps)(TodoList);
+const mapStateToProps = (state) => {
+    return {
+        state: state
+    }
+};
+const ConnectedTodolist = connect(mapStateToProps, mapDispatchToProps)(TodoList);
 
 export default ConnectedTodolist;
 
