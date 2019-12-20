@@ -31,7 +31,7 @@ export const api = {
     updateTodolistTitle(title, todolistId) {
         return instance.put(`/${todolistId}`, {title: title})
     }
-}
+};
 
 
 

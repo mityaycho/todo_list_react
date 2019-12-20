@@ -7,11 +7,11 @@ import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
 import {
     addTaskTC,
-    deleteTaskAC,
+    deleteTaskTC,
     deleteTodolistTC,
     setTasksTC,
     updateTaskTC,
-    updateTodolistTitleAC
+    updateTodolistTitleAC, updateTodolistTitleTC
 } from "./reducer";
 import {api} from "./api";
 
@@ -92,18 +92,21 @@ class TodoList extends React.Component {
     }
 
     deleteTask = (taskId) => {
-        api.deleteTask(taskId)
-            .then(res => {
-                // раз попали в then, значит
-                this.props.deleteTask(taskId, this.props.id);
-            });
+        debugger
+        this.props.deleteTask(taskId, this.props.id);
+        // api.deleteTask(taskId)
+        //     .then(res => {
+        //         // раз попали в then, значит
+        //         this.props.deleteTask(taskId, this.props.id);
+        //     });
     }
 
     updateTitle = (title) => {
-        api.updateTodolistTitle(title, this.props.id)
-            .then(res => {
-                this.props.updateTodolistTitle(title, this.props.id);
-            });
+        this.props.updateTodolistTitle(title, this.props.id);
+        // api.updateTodolistTitle(title, this.props.id)
+        //     .then(res => {
+        //         this.props.updateTodolistTitle(title, this.props.id);
+        //     });
     }
 
     render = () => {
@@ -154,11 +157,11 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(action)
         },
         deleteTask: (taskId, todolistId) => {
-            const action = deleteTaskAC(todolistId, taskId);
+            const action = deleteTaskTC(taskId, todolistId);
             dispatch(action)
         },
         updateTodolistTitle: (title, todolistId) => {
-            const action = updateTodolistTitleAC(todolistId, title);
+            const action = updateTodolistTitleTC(title, todolistId);
             dispatch(action)
         }
     }

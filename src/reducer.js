@@ -39,30 +39,30 @@ const reducer = (state = initialState, action) => {
                         return {...tl, tasks: action.tasks}
                     }
                 })
-            }
+            };
         case SET_TODOLISTS:
             return {
                 ...state,
                 todolists: action.todolists.map(tl => ({...tl, tasks: []}))
-            }
+            };
         case ADD_TODOLIST:
             return {
                 ...state,
                 todolists: [...state.todolists, action.newTodolist]
-            }
+            };
         case DELETE_TODOLIST:
             return {
                 ...state,
-                todolists: state.todolists.filter(tl => tl.id != action.todolistId)
-            }
+                todolists: state.todolists.filter(tl => tl.id !== action.todolistId)
+            };
         case UPDATE_TODOLIST_TITLE:
             return {
                 ...state,
                 todolists: state.todolists.map(tl => {
-                    if (tl.id != action.todolistId) return tl;
+                    if (tl.id !== action.todolistId) return tl;
                     else return {...tl, title: action.title}
                 })
-            }
+            };
         case DELETE_TASK:
             return {
                 ...state,
@@ -70,13 +70,13 @@ const reducer = (state = initialState, action) => {
                     if (tl.id === action.todolistId) {
                         return {
                             ...tl,
-                            tasks: tl.tasks.filter(t => t.id != action.taskId)
+                            tasks: tl.tasks.filter(t => t.id !== action.taskId)
                         }
                     } else {
                         return tl
                     }
                 })
-            }
+            };
         case ADD_TASK:
             return {
                 ...state,
@@ -87,7 +87,7 @@ const reducer = (state = initialState, action) => {
                         return tl
                     }
                 })
-            }
+            };
         case UPDATE_TASK:
             return {
                 ...state,
@@ -96,7 +96,7 @@ const reducer = (state = initialState, action) => {
                         return {
                             ...tl,
                             tasks: tl.tasks.map(t => {
-                                if (t.id != action.taskId) {
+                                if (t.id !== action.taskId) {
                                     return t;
                                 } else {
                                     return {...t, ...action.obj};
@@ -111,39 +111,47 @@ const reducer = (state = initialState, action) => {
     }
     console.log("reducer: ", action);
     return state;
-}
+};
 
 const updateTaskAC = (taskId, obj, todolistId) => ({ type: UPDATE_TASK, taskId, obj, todolistId });
 export const updateTaskTC = (taskId, obj, todolistId) => (dispatch, getState) => {
     let todolist = getState().todolists.find(tl => tl.id === todolistId);
     let tasks = todolist.tasks;
     let task = tasks.find(t => t.id === taskId);
-    api.updateTask({...task, ...obj}).then(res => {
+    api.updateTask({...task, ...obj})
+      .then(res => {
         dispatch(updateTaskAC(taskId, obj, todolistId))
     })
-}
+};
 
 const deleteTodolistAC = (todolistId) => ({type: DELETE_TODOLIST, todolistId: todolistId});
 export const deleteTodolistTC = (todolistId) => (dispatch) => {
-    api.deleteTodolist(this.props.id).then(res => {
-            dispatch(deleteTodolistAC(this.props.id));
+    api.deleteTodolist(todolistId)
+      .then(res => {
+            dispatch(deleteTodolistAC(todolistId));
         });
 };
 
-export const deleteTaskAC = (todolistId, taskId) => ({type: DELETE_TASK, todolistId, taskId});
+const deleteTaskAC = (taskId, todolistId) => ({type: DELETE_TASK, taskId, todolistId});
+export const deleteTaskTC = (taskId, todolistId) => (dispatch) => {
+    api.deleteTask(taskId).then(res => {
+            dispatch(deleteTaskAC(taskId, todolistId));
+        });
+};
 
+const updateTodolistTitleAC = (title, todolistId) => ({type: UPDATE_TODOLIST_TITLE, title, todolistId});
+export const updateTodolistTitleTC = (title, todolistId) => (dispatch) => {
+    api.updateTodolistTitle(title, todolistId)
+      .then(res => {
+          dispatch(updateTodolistTitleAC(title, todolistId));
+      });
+};
 
-export const updateTodolistTitleAC = (todolistId, title) => {
-    return {
-        type: UPDATE_TODOLIST_TITLE,
-        todolistId,
-        title
-    };
-}
 
 const addTaskAC = (newTask, todolistId) => ({ type: ADD_TASK, newTask, todolistId });
 export const addTaskTC = (newText, todolistId) => (dispatch) => {
-    api.createTask(newText, todolistId).then(res => {
+    api.createTask(newText, todolistId)
+      .then(res => {
             let newTask = res.data.data.item;
             dispatch(addTaskAC(newTask, todolistId));
         });
@@ -151,7 +159,8 @@ export const addTaskTC = (newText, todolistId) => (dispatch) => {
 
 const setTasksAC = (tasks, todolistId) => ({ type: SET_TASKS, tasks, todolistId });
 export const setTasksTC= (todolistId) => (dispatch) => {
-    api.getTasks(todolistId).then(res => {
+    api.getTasks(todolistId)
+      .then(res => {
             let allTasks = res.data.items;                           // items - это таски сервака
             dispatch(setTasksAC(allTasks, todolistId));
         });
@@ -159,7 +168,8 @@ export const setTasksTC= (todolistId) => (dispatch) => {
 
 const addTodolistAC = (newTodolist) => ({type: ADD_TODOLIST, newTodolist: newTodolist});
 export const addTodolistTC = (title) => (dispatch) => {
-    api.createTodolist(title).then(res => {
+    api.createTodolist(title)
+      .then(res => {
             let todolist = res.data.data.item;
             dispatch(addTodolistAC(todolist));
         });
@@ -167,7 +177,8 @@ export const addTodolistTC = (title) => (dispatch) => {
 
 export const setTodolistsAC = (todolists) => ({type: SET_TODOLISTS, todolists: todolists});
 export const loadTodolistsTC = () => (dispatch, getState) => {
-    api.getTodolists().then(res => {
+    api.getTodolists()
+      .then(res => {
         dispatch(setTodolistsAC(res.data))
     });
 };
