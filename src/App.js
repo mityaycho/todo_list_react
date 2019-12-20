@@ -67,14 +67,14 @@ class App extends React.Component {
             .map(tl => <TodoList key={tl.id} id={tl.id} title={tl.title} tasks={tl.tasks}/>)
 
         return (
-            <>
-                <div>
+            <div className="App">
+                <div className="todo-list">
                     <AddNewItemForm addItem={this.addTodoList}/>
                 </div>
-                <div className="App">
+                <div className="todo-list-task">
                     {todolists}
                 </div>
-            </>
+            </div>
         );
     }
 }

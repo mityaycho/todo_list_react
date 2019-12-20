@@ -1,6 +1,22 @@
 .App {
+  min-height: 100vh;
+  min-width: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+}
+
+.todo-list {
+  margin-top: 10%;
   display: flex;
   flex-direction: row;
+  align-self: center;
+}
+
+.todo-list-task {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
 }
 
 .todoList {
