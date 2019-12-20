@@ -2,17 +2,35 @@ import React from 'react';
 import './App.css';
 
 class TodoListTitle extends React.Component {
-   render = () => {
+    state = {
+        editMode: false,
+        title: this.props.title
+    }
+
+    onTitleChanged = (e) => {
+        this.setState({title: e.currentTarget.value});
+    }
+
+    deactivateEditMode = () => {
+        this.setState({editMode: false});
+        this.props.updateTitle(this.state.title);
+    }
+
+    activateEditMode = () => {
+        this.setState({editMode: true});
+    }
+
+    render = () => {
         return (
-          <div>
-            {this.props.editMode ?
-              <input type="text" value={this.state.todoTitle} onBlur={this.props.deactivateEditMode}
-              onChange={this.changeTodoTitle}/> :
-            <h3 className="todoList-header__title">{this.props.title}
-              <button onClick={this.props.onDelete}>X</button>
-            </h3>
+            <>
+            {
+                this.state.editMode
+                    ? <input value={this.state.title} autoFocus={true} onBlur={this.deactivateEditMode} onChange={this.onTitleChanged}/>
+                    : <h3 className="todoList-header__title" onClick={this.activateEditMode}>{this.props.title}
+                        <button onClick={this.props.onDelete}>X</button>
+                    </h3>
             }
-          </div>
+            </>
         );
     }
 }
