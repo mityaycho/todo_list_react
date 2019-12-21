@@ -2,7 +2,7 @@ import axios from "axios";
 
 const instance = axios.create({
     baseURL: "https://social-network.samuraijs.com/api/1.0/todo-lists",
-    withCredentials: true,                                       // передавай с запросом куки для запрашиваемого домена
+    withCredentials: true,                                       // передаваём с запросом куки для запрашиваемого домена
     headers: {"API-KEY": "5ac078f7-4935-4223-bad6-63f58b80cd23"} // специальный ключ в заголовках передаём
 });
 

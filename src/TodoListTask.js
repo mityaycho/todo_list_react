@@ -31,7 +31,7 @@ class TodoListTask extends React.Component {
   };
 
   render = () => {
-    let containerCssClass = this.props.task.status === 2 ? "todoList-task done" : "todoList-task";
+    let containerCssClass = this.props.task.status === 2 ? "done" : "undone";
     let priotityTitle = "";
     switch (this.props.task.priority) {
       case 0:
@@ -49,19 +49,25 @@ class TodoListTask extends React.Component {
       case 4:
         priotityTitle = "Later";
         break;
+      default:
+        priotityTitle = "Low";
     }
 
     return (
-      <div className={containerCssClass}>
-        <input type="checkbox" checked={this.props.task.status === 2}
-               onChange={this.onIsDoneChanged}/>
-        {this.state.editMode
-          ? <input onBlur={this.deactivateEditMode} onChange={this.onTitleChanged} autoFocus={true}
-                   value={this.state.title}/>
-          : <span onClick={this.activateEditMode}>{this.props.task.title}</span>
-        }, priority: {priotityTitle}
-        <button onClick={this.onDeleteTask}>X</button>
-      </div>
+      <section className={containerCssClass}>
+        <div className="task-title">
+          <h2>{containerCssClass}</h2><button onClick={this.onDeleteTask}>X</button>
+        </div>
+        <label>
+          <input type="checkbox" checked={this.props.task.status}
+                 onChange={this.onIsDoneChanged}/>
+          {this.state.editMode
+            ? <input onBlur={this.deactivateEditMode} onChange={this.onTitleChanged} autoFocus={true}
+                     value={this.state.title}/>
+            : <span onClick={this.activateEditMode}>{this.props.task.title}</span>
+          }, priority: {priotityTitle}
+        </label>
+      </section>
     );
   }
 }

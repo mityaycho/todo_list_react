@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import TodoListTasks from "./TodoListTasks";
-import TodoListFooter from "./TodoListFooter";
+import TodoListFilter from "./TodoListFilter";
 import TodoListTitle from "./TodoListTitle";
 import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
@@ -81,12 +81,12 @@ class TodoList extends React.Component {
   render = () => {
     let {tasks = []} = this.props;
     return (
-      <div className="todoList">
-        <div className="todoList-header">
+      <div className="todoListTitle">
+        <main className="todo-list">
           <TodoListTitle title={this.props.title} onDelete={this.deleteTodolist} updateTitle={this.updateTitle}/>
           <AddNewItemForm addItem={this.addTask}/>
-        </div>
-
+        </main>
+        <TodoListFilter changeFilter={this.changeFilter} filterValue={this.state.filterValue}/>
         <TodoListTasks changeStatus={this.changeStatus}
                        changeTitle={this.changeTitle}
                        deleteTask={this.deleteTask}
@@ -102,7 +102,6 @@ class TodoList extends React.Component {
                            return t.status === 2;
                          }
                        })}/>
-        <TodoListFooter changeFilter={this.changeFilter} filterValue={this.state.filterValue}/>
       </div>
     );
   }
