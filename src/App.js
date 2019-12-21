@@ -14,18 +14,13 @@ class App extends React.Component {
   };
 
   addTodoList = (title) => {
-    this.props.addTodolist(title)
-    // api.createTodolist(title)
-    //     .then(res => {
-    //         let todolist = res.data.data.item;
-    //         this.props.addTodolist(todolist);
-    //     });
+    this.props.addTodolist(title);
   };
 
 
   componentDidMount() {
     this.restoreState();
-  }
+  };
 
 
   saveState = () => {

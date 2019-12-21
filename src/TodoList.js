@@ -20,11 +20,11 @@ class TodoList extends React.Component {
   constructor(props) {
     super(props);
     this.newTasksTitileRef = React.createRef();
-  }
+  };
 
   componentDidMount() {
     this.restoreState();
-  }
+  };
 
   saveState = () => {
     // переводим объект в строку
@@ -34,12 +34,7 @@ class TodoList extends React.Component {
   };
 
   restoreState = () => {
-    this.props.setTasks(this.props.id)
-    // api.getTasks(this.props.id)
-    //     .then(res => {
-    //         let allTasks = res.data.items;                           // items - это таски сервака
-    //         this.props.setTasks(allTasks, this.props.id);
-    //     });
+    this.props.setTasks(this.props.id);
   };
 
 
@@ -49,10 +44,6 @@ class TodoList extends React.Component {
 
   addTask = (newText) => {
     this.props.addTask(newText, this.props.id);
-    // api.createTask(newText, this.props.id).then(res => {
-    //     let newTask = res.data.data.item;
-    //     this.props.addTask(newTask, this.props.id);
-    // });
   };
 
   changeFilter = (newFilterValue) => {
@@ -65,14 +56,6 @@ class TodoList extends React.Component {
 
   changeTask = (taskId, obj) => {
     this.props.updateTask(taskId, obj, this.props.id);
-    // this.props.tasks.forEach(t => {
-    //     if (t.id === taskId) {
-    //         api.updateTask({...t, ...obj})
-    //             .then(res => {
-    //                 this.props.updateTask(taskId, obj, this.props.id);
-    //             });
-    //     }
-    // })
   };
 
   changeStatus = (taskId, status) => {
@@ -85,28 +68,14 @@ class TodoList extends React.Component {
 
   deleteTodolist = () => {
     this.props.deleteTodolist(this.props.id);
-    // api.deleteTodolist(this.props.id)
-    //     .then(res => {
-    //         // раз попали в then, значит
-    //         this.props.deleteTodolist(this.props.id);
-    //     });
   };
 
   deleteTask = (taskId) => {
     this.props.deleteTask(taskId, this.props.id);
-    // api.deleteTask(taskId)
-    //     .then(res => {
-    //         // раз попали в then, значит
-    //         this.props.deleteTask(taskId, this.props.id);
-    //     });
   };
 
   updateTitle = (title) => {
     this.props.updateTodolistTitle(title, this.props.id);
-    // api.updateTodolistTitle(title, this.props.id)
-    //     .then(res => {
-    //         this.props.updateTodolistTitle(title, this.props.id);
-    //     });
   };
 
   render = () => {
@@ -116,7 +85,6 @@ class TodoList extends React.Component {
         <div className="todoList-header">
           <TodoListTitle title={this.props.title} onDelete={this.deleteTodolist} updateTitle={this.updateTitle}/>
           <AddNewItemForm addItem={this.addTask}/>
-
         </div>
 
         <TodoListTasks changeStatus={this.changeStatus}
