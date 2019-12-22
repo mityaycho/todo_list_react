@@ -34,8 +34,8 @@ class TodoListFilter extends React.Component {
             <Button className={classForActive} title="Active" onClick={this.onActiveFilterClick}/>
           </div>
           }
-          {!this.state.isHidden && <span onClick={this.onShowFiltersClick}>hide</span>}
-          {this.state.isHidden && <span onClick={this.onHideFiltersClick}>show</span>}
+          {!this.state.isHidden && <span className="universe-button show-btn" onClick={this.onShowFiltersClick}>hide</span>}
+          {this.state.isHidden && <span className="universe-button show-btn" onClick={this.onHideFiltersClick}>show</span>}
         </div>
       </div>
     );

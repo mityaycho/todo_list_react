@@ -128,6 +128,13 @@ input {
   cursor: pointer;
 }
 
+.show-btn {
+  font-style: inherit;
+  font-weight: bold;
+  color: white;
+  padding: 0 5px;
+}
+
 .done {
   display: flex;
   flex-direction: column;
