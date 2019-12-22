@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
+import {Button} from "./Button";
 
 class AddNewItemForm extends React.Component {
     state = {
         error: false,
         title: ""
-    }
+    };
 
     onAddItemClick = () => {
         let newText = this.state.title;
@@ -18,7 +19,7 @@ class AddNewItemForm extends React.Component {
             // передаём новый текст наружу
             this.props.addItem(newText);
         }
-    }
+    };
 
     onTitleChanged = (e) => {
         this.setState({
@@ -31,7 +32,7 @@ class AddNewItemForm extends React.Component {
         if (e.key === "Enter") {
             this.onAddItemClick();
         }
-    }
+    };
 
 
     render = () => {
@@ -39,12 +40,13 @@ class AddNewItemForm extends React.Component {
 
         return (
             <div className="todoList-newTaskForm">
-                <input className={classNameForInput} type="text" placeholder="New item name"
+                <input className={classNameForInput} type="text"
+                       placeholder={this.props.placeholder}
                        onChange={this.onTitleChanged}
                        onKeyPress={this.onKeyPress}
                        value={this.state.title}
                 />
-                <button onClick={this.onAddItemClick}>Add</button>
+                <Button className="universe-button" title="add" onClick={this.onAddItemClick}/>
             </div>
 
         );

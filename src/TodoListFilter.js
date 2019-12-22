@@ -20,9 +20,9 @@ class TodoListFilter extends React.Component {
 
   render = (props) => {
 
-    let classForAll = this.props.filterValue === "All" ? "filter-active" : "";
-    let classForCompleted = this.props.filterValue === "Completed" ? "filter-active" : "";
-    let classForActive = this.props.filterValue === "Active" ? "filter-active" : "";
+    let classForAll = this.props.filterValue === "All" ? "filter-active" : "universe-button";
+    let classForCompleted = this.props.filterValue === "Completed" ? "filter-active" : "universe-button";
+    let classForActive = this.props.filterValue === "Active" ? "filter-active" : "universe-button";
 
     return (
       <div className="filter-container">

@@ -84,7 +84,7 @@ class TodoList extends React.Component {
       <div className="todoListTitle">
         <main className="todo-list">
           <TodoListTitle title={this.props.title} onDelete={this.deleteTodolist} updateTitle={this.updateTitle}/>
-          <AddNewItemForm addItem={this.addTask}/>
+          <AddNewItemForm addItem={this.addTask} placeholder="New task" />
         </main>
         <TodoListFilter changeFilter={this.changeFilter} filterValue={this.state.filterValue}/>
         <TodoListTasks changeStatus={this.changeStatus}

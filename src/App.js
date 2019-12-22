@@ -63,7 +63,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <div className="todoList">
-          <AddNewItemForm addItem={this.addTodoList}/>
+          <AddNewItemForm addItem={this.addTodoList} placeholder="New title task"/>
         </div>
         <div className="todo-list-task">
           {todolists}
