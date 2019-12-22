@@ -29,7 +29,7 @@ class TodoListTitle extends React.Component {
             ? <input value={this.state.title} autoFocus={true} onBlur={this.deactivateEditMode}
                      onChange={this.onTitleChanged}/>
             : <h1 className="todoList-header__title" onClick={this.activateEditMode}>{this.props.title}
-              <Button title="delete" onClick={this.props.onDelete}/>
+              <Button className="universe-button" title="delete" onClick={this.props.onDelete}/>
             </h1>
         }
       </>

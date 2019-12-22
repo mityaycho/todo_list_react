@@ -57,7 +57,7 @@ class TodoListTask extends React.Component {
     return (
       <section className={containerCssClass}>
         <div className="task-title">
-          <h2>{containerCssClass}</h2><Button title="delete" onClick={this.onDeleteTask}/>
+          <h2>{containerCssClass}</h2><Button className="universe-button" title="delete" onClick={this.onDeleteTask}/>
         </div>
         <label>
           <input type="checkbox" checked={this.props.task.status}

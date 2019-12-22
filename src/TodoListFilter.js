@@ -1,5 +1,6 @@
 import React from 'react';
 import '../src/App.css';
+import {Button} from "./Button";
 
 class TodoListFilter extends React.Component {
 
@@ -28,9 +29,9 @@ class TodoListFilter extends React.Component {
         <div className="todoList-filter">
           {!this.state.isHidden &&
           <div className="buttons-filter">
-            <button onClick={this.onAllFilterClick} className={classForAll}>All</button>
-            <button onClick={this.onCompletedFilterClick} className={classForCompleted}>Completed</button>
-            <button onClick={this.onActiveFilterClick} className={classForActive}>Active</button>
+            <Button className={classForAll} title="All" onClick={this.onAllFilterClick}/>
+            <Button className={classForCompleted} title="Completed" onClick={this.onCompletedFilterClick}/>
+            <Button className={classForActive} title="Active" onClick={this.onActiveFilterClick}/>
           </div>
           }
           {!this.state.isHidden && <span onClick={this.onShowFiltersClick}>hide</span>}

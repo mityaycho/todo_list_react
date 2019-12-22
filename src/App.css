@@ -68,8 +68,7 @@ h2 {
 
 .filter-container {
   display: flex;
-  flex-direction: row;
-  align-self: center;
+  justify-content: center;
 }
 
 .todoListTitle {
@@ -112,4 +111,8 @@ input {
   font-size: 16px;
   font-style: italic;
   cursor: pointer;
+}
+
+.done {
+  
 }
