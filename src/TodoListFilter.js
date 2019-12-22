@@ -26,7 +26,8 @@ class TodoListFilter extends React.Component {
     return (
       <div className="filter-container">
         <div className="todoList-filter">
-          {!this.state.isHidden && <div>
+          {!this.state.isHidden &&
+          <div className="buttons-filter">
             <button onClick={this.onAllFilterClick} className={classForAll}>All</button>
             <button onClick={this.onCompletedFilterClick} className={classForCompleted}>Completed</button>
             <button onClick={this.onActiveFilterClick} className={classForActive}>Active</button>

@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import {Button} from "./Button";
 
 class TodoListTitle extends React.Component {
   state = {
@@ -28,7 +29,7 @@ class TodoListTitle extends React.Component {
             ? <input value={this.state.title} autoFocus={true} onBlur={this.deactivateEditMode}
                      onChange={this.onTitleChanged}/>
             : <h1 className="todoList-header__title" onClick={this.activateEditMode}>{this.props.title}
-              <button className="universe-button" onClick={this.props.onDelete}>delete</button>
+              <Button title="delete" onClick={this.props.onDelete}/>
             </h1>
         }
       </>

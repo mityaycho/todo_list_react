@@ -1,5 +1,6 @@
 import React from 'react';
 import './App.css';
+import {Button} from "./Button";
 
 class TodoListTask extends React.Component {
 
@@ -56,7 +57,7 @@ class TodoListTask extends React.Component {
     return (
       <section className={containerCssClass}>
         <div className="task-title">
-          <h2>{containerCssClass}</h2><button onClick={this.onDeleteTask}>X</button>
+          <h2>{containerCssClass}</h2><Button title="delete" onClick={this.onDeleteTask}/>
         </div>
         <label>
           <input type="checkbox" checked={this.props.task.status}
