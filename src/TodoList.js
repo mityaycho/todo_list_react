@@ -22,6 +22,10 @@ class TodoList extends React.Component {
     this.newTasksTitileRef = React.createRef();
   };
 
+  state = {
+    filterValue: "All"
+  };
+
   componentDidMount() {
     this.restoreState();
   };
@@ -35,11 +39,6 @@ class TodoList extends React.Component {
 
   restoreState = () => {
     this.props.setTasks(this.props.id);
-  };
-
-
-  state = {
-    filterValue: "All"
   };
 
   addTask = (newText) => {
