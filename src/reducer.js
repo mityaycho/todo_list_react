@@ -162,7 +162,7 @@ const setTasksAC = (tasks, todolistId) => ({type: SET_TASKS, tasks, todolistId})
 export const setTasksTC = (todolistId) => (dispatch) => {
   api.getTasks(todolistId)
     .then(res => {
-      let allTasks = res.data.items;                           // items - это таски сервака
+      let allTasks = res.data.items;
       dispatch(setTasksAC(allTasks, todolistId));
     });
 };

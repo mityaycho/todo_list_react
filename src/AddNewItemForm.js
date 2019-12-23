@@ -26,7 +26,7 @@ class AddNewItemForm extends React.Component {
             error: false,
             title: e.currentTarget.value
         });
-    }
+    };
 
     onKeyPress = (e) => {
         if (e.key === "Enter") {
