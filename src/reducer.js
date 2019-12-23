@@ -177,7 +177,7 @@ export const addTodolistTC = (title) => (dispatch) => {
 };
 
 export const setTodolistsAC = (todolists) => ({type: SET_TODOLISTS, todolists: todolists});
-export const loadTodolistsTC = () => (dispatch, getState) => {
+export const loadTodolistsTC = () => (dispatch) => {
   api.getTodolists()
     .then(res => {
       dispatch(setTodolistsAC(res.data))
