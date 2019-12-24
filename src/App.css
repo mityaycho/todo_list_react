@@ -135,6 +135,7 @@ h2 {
 .task {
   display: flex;
   flex-direction: row;
+  margin-bottom: 10px;
 }
 
 .task-input {
