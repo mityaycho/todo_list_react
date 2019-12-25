@@ -7,12 +7,6 @@ import {addTodolistTC, loadTodolistsTC} from "./reducer";
 
 class App extends React.Component {
 
-  nextTodoListId = 0;
-
-  state = {
-    todolists: []
-  };
-
   addTodoList = (title) => {
     this.props.addTodolist(title);
   };

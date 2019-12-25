@@ -135,7 +135,14 @@ h2 {
 .task {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: 10px;
+}
+
+.task span {
+  display: flex;
+  flex-direction: row;
 }
 
 .task-input {
