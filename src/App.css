@@ -132,21 +132,35 @@ h2 {
   outline: none;
 }
 
-.task {
+.task-container {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 10px;
+  font-size: 14px;
 }
 
-.task span {
+.task-container:hover {
+  cursor: pointer;
+}
+
+.task-container span {
   display: flex;
   flex-direction: row;
 }
 
-.task-input {
+.task-checkbox {
   width: auto;
+}
+
+.task-checkbox:hover {
+  cursor: pointer;
+}
+
+.task {
+  cursor: text;
+  font-size: 23px;
 }
 
 .universe-button {

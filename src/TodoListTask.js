@@ -59,14 +59,17 @@ class TodoListTask extends React.Component {
         <div className="task-title">
           <h2>{containerCssClass}</h2><Button className="universe-button" title="delete" onClick={this.onDeleteTask}/>
         </div>
-        <label className="task">
-          <input className="task-input" type="checkbox" checked={this.props.task.status}
-                 onChange={this.onIsDoneChanged}/>
-          {this.state.editMode
-            ? <input onBlur={this.deactivateEditMode} onChange={this.onTitleChanged} autoFocus={true}
-                     value={this.state.title}/>
-            : <span onClick={this.activateEditMode}>{this.props.task.title},</span>
-          }&nbsp; priority: {priotityTitle}
+        <label className="task-container">
+          <span>
+           <input className="task-checkbox" type="checkbox" checked={this.props.task.status}
+                  onChange={this.onIsDoneChanged}/>
+            {this.state.editMode
+              ? <input onBlur={this.deactivateEditMode} onChange={this.onTitleChanged} autoFocus={true}
+                       value={this.state.title}/>
+              : <span className="task" onDoubleClick={this.activateEditMode}>{this.props.task.title},</span>
+            }
+          </span>
+          &nbsp; priority: {priotityTitle}
         </label>
       </section>
     );
