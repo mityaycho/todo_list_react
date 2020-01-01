@@ -11,7 +11,7 @@ export const api = {
         return instance.post(`/${todolistId}/tasks`, {title: newTaskTitle});
     },
     createTodolist(title) {
-        return instance.post("", {title: title})
+        return instance.post("", {title: title});
     },
     getTodolists() {
         return instance.get("");
@@ -20,16 +20,16 @@ export const api = {
         return instance.put(`/tasks`,  task);
     },
     deleteTodolist(id) {
-        return instance.delete("/" + id)
+        return instance.delete("/" + id);
     },
     deleteTask(id) {
-        return instance.delete(`/tasks/${id}`)
+        return instance.delete(`/tasks/${id}`);
     },
     getTasks(todolistId) {
-        return instance.get(`/${todolistId}/tasks`)
+        return instance.get(`/${todolistId}/tasks`);
     },
     updateTodolistTitle(title, todolistId) {
-        return instance.put(`/${todolistId}`, {title: title})
+        return instance.put(`/${todolistId}`, {title: title});
     }
 };
 
