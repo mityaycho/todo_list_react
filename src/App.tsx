@@ -5,7 +5,14 @@ import AddNewItemForm from "./AddNewItemForm";
 import {connect} from "react-redux";
 import {addTodolistTC, loadTodolistsTC} from "./reducer";
 
-class App extends React.Component {
+
+interface IProps {
+  addTodolist: any;
+  loadTodolists: any;
+  todolists: any;
+}
+
+class App extends React.Component<IProps> {
 
   addTodoList = (title) => {
     this.props.addTodolist(title);
