@@ -9,12 +9,16 @@ import {addTodolistTC, loadTodolistsTC} from "./reducer";
 interface IProps {
   addTodolist: any;
   loadTodolists: any;
-  todolists: any;
+  todolists: any[];
 }
 
-class App extends React.Component<IProps> {
+interface IAddTodoList {
+  addTodolist: (title: string) => void;
+}
 
-  addTodoList = (title) => {
+class App extends React.Component<IProps, IAddTodoList> {
+
+  addTodoList = (title: string) => {
     this.props.addTodolist(title);
   };
 
@@ -43,18 +47,18 @@ class App extends React.Component<IProps> {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   return {
     todolists: state.todolists
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
     loadTodolists: () => {
       dispatch(loadTodolistsTC())
     },
-    addTodolist: (title) => {
+    addTodolist: (title: string) => {
       const action = addTodolistTC(title);
       dispatch(action)
     }
