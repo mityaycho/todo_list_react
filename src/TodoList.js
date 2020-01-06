@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import TodoListTasks from "./TodoListTasks";
-import TodoListFilter from "./TodoListFilter";
-import TodoListTitle from "./TodoListTitle";
-import AddNewItemForm from "./AddNewItemForm";
-import {connect} from "react-redux";
+import TodoListTasks from './TodoListTasks';
+import TodoListFilter from './TodoListFilter';
+import TodoListTitle from './TodoListTitle';
+import AddNewItemForm from './AddNewItemForm';
+import {connect} from 'react-redux';
 import {
   addTaskTC,
   deleteTaskTC,

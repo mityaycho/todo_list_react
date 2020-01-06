@@ -1,4 +1,4 @@
-import {api} from "./api";
+import {api} from './api';
 
 export const ADD_TODOLIST = "TodoList/Reducer/ADD-TODOLIST";
 export const DELETE_TODOLIST = "TodoList/Reducer/DELETE-TODOLIST";

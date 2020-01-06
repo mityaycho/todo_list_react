@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import TodoList from "./TodoList";
-import AddNewItemForm from "./AddNewItemForm";
-import {connect} from "react-redux";
-import {addTodolistTC, loadTodolistsTC} from "./reducer";
+import TodoList from './TodoList';
+import AddNewItemForm from './AddNewItemForm';
+import {connect} from 'react-redux';
+import {addTodolistTC, loadTodolistsTC} from './reducer';
 
 
 interface IProps {
