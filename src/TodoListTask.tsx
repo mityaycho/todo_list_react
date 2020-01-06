@@ -2,7 +2,13 @@ import React from 'react';
 import './App.css';
 import {Button} from "./Button";
 
-class TodoListTask extends React.Component {
+interface IProps {
+  task: any;
+  title: string;
+  changeStatus: any;
+}
+
+class TodoListTask extends React.Component<IProps> {
 
   state = {
     editMode: false,
