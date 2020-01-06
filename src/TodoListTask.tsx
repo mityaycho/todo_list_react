@@ -6,6 +6,8 @@ interface IProps {
   task: any;
   title: string;
   changeStatus: any;
+  changeTitle: any;
+  deleteTask: any;
 }
 
 class TodoListTask extends React.Component<IProps> {
@@ -15,12 +17,12 @@ class TodoListTask extends React.Component<IProps> {
     title: this.props.task.title
   };
 
-  onIsDoneChanged = (e) => {
+  onIsDoneChanged = (e: any) => {
     let status = e.currentTarget.checked ? 2 : 0;
     this.props.changeStatus(this.props.task.id, status);
   };
 
-  onTitleChanged = (e) => {
+  onTitleChanged = (e: any) => {
     this.setState({title: e.currentTarget.value});
   };
 
@@ -39,25 +41,25 @@ class TodoListTask extends React.Component<IProps> {
 
   render = () => {
     let containerCssClass = this.props.task.status === 2 ? "done" : "undone";
-    let priotityTitle = "";
+    let priorityTitle = "";
     switch (this.props.task.priority) {
       case 0:
-        priotityTitle = "Low";
+        priorityTitle = "Low";
         break;
       case 1:
-        priotityTitle = "Middle";
+        priorityTitle = "Middle";
         break;
       case 2:
-        priotityTitle = "High";
+        priorityTitle = "High";
         break;
       case 3:
-        priotityTitle = "Urgently";
+        priorityTitle = "Urgently";
         break;
       case 4:
-        priotityTitle = "Later";
+        priorityTitle = "Later";
         break;
       default:
-        priotityTitle = "Low";
+        priorityTitle = "Low";
     }
 
     return (
@@ -75,7 +77,7 @@ class TodoListTask extends React.Component<IProps> {
               : <span className="task" onDoubleClick={this.activateEditMode}>{this.props.task.title}</span>
             }
           </span>
-          priority: {priotityTitle}
+          priority: {priorityTitle}
         </label>
       </section>
     );
