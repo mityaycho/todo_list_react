@@ -5,6 +5,9 @@ import {Button} from './Button';
 interface ITodoListTitle {
   editMode: boolean;
   title: string;
+  updateTitle: any;
+  onDelete: any;
+
 }
 
 class TodoListTitle extends React.Component<ITodoListTitle> {
@@ -13,7 +16,7 @@ class TodoListTitle extends React.Component<ITodoListTitle> {
     title: this.props.title
   };
 
-  onTitleChanged = (e) => {
+  onTitleChanged = (e: any) => {
     this.setState({title: e.currentTarget.value});
   };
 
