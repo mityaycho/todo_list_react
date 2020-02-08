@@ -71,10 +71,14 @@ class TodoListTask extends React.Component<IProps> {
         </div>
         <label className="task-container">
           <span>
-           <input className="task-checkbox" type="checkbox" checked={this.props.task.status}
+           <input className="task-checkbox"
+                  type="checkbox"
+                  checked={this.props.task.status}
                   onChange={this.onIsDoneChanged}/>
             {this.state.editMode
-              ? <input onBlur={this.deactivateEditMode} onChange={this.onTitleChanged} autoFocus={true}
+              ? <input onBlur={this.deactivateEditMode}
+                       onChange={this.onTitleChanged}
+                       autoFocus={true}
                        value={this.state.title}/>
               : <span className="task" onDoubleClick={this.activateEditMode}>{this.props.task.title}</span>
             }

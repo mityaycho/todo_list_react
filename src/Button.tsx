@@ -1,4 +1,10 @@
 import React from 'react';
 
-export const Button: React.FC = (props: any) => <button className={props.className}
+interface IButton {
+    className: string;
+    onClick: () => void;
+    title: string
+}
+
+export const Button = (props: IButton) => <button className={props.className}
                                          onClick={props.onClick}>{props.title}</button>;
