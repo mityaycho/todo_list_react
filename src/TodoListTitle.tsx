@@ -2,7 +2,12 @@ import React from 'react';
 import './App.css';
 import {Button} from './Button';
 
-class TodoListTitle extends React.Component {
+interface ITodoListTitle {
+  editMode: boolean;
+  title: string;
+}
+
+class TodoListTitle extends React.Component<ITodoListTitle> {
   state = {
     editMode: false,
     title: this.props.title
