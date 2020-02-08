@@ -65,7 +65,9 @@ class TodoListTask extends React.Component<IProps> {
     return (
       <section className={containerCssClass}>
         <div className="task-title">
-          <h2>{containerCssClass}</h2><Button className="universe-button" title="delete" onClick={this.onDeleteTask}/>
+          <h2>{containerCssClass}</h2><Button className="universe-button"
+                                              title="delete"
+                                              onClick={this.onDeleteTask}/>
         </div>
         <label className="task-container">
           <span>

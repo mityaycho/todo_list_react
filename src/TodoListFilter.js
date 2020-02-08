@@ -18,7 +18,7 @@ class TodoListFilter extends React.Component {
 
   onHideFiltersClick = () => this.setState({isHidden: false});
 
-  render = (props) => {
+  render = () => {
 
     let classForAll = this.props.filterValue === "All" ? "filter-active" : "universe-button";
     let classForCompleted = this.props.filterValue === "Completed" ? "filter-active" : "universe-button";
