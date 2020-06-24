@@ -112,7 +112,7 @@ const reducer = (state = initialState, action) => {
       };
     default:
       return state
-  }
+  };
 };
 
 const updateTaskAC = (taskId, obj, todolistId) => ({type: UPDATE_TASK, taskId, obj, todolistId});
@@ -123,7 +123,7 @@ export const updateTaskTC = (taskId, obj, todolistId) => (dispatch, getState) =>
   api.updateTask({...task, ...obj})
     .then(res => {
       dispatch(updateTaskAC(taskId, obj, todolistId))
-    })
+    });
 };
 
 const deleteTodolistAC = (todolistId) => ({type: DELETE_TODOLIST, todolistId: todolistId});

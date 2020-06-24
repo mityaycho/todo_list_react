@@ -4,7 +4,8 @@ import TodoListTasks from './TodoListTasks';
 import TodoListFilter from './TodoListFilter';
 import TodoListTitle from './TodoListTitle';
 import AddNewItemForm from './AddNewItemForm';
-import {connect} from 'react-redux';
+
+import { connect } from 'react-redux';
 import {
   addTaskTC,
   deleteTaskTC,
@@ -105,8 +106,8 @@ class TodoList extends React.Component {
         </section>
       </div>
     );
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -132,10 +133,9 @@ const mapDispatchToProps = (dispatch) => {
       const action = updateTodolistTitleTC(title, todolistId);
       dispatch(action)
     }
-  }
+  };
 };
 
 const ConnectedTodolist = connect(null, mapDispatchToProps)(TodoList);
 
 export default ConnectedTodolist;
-

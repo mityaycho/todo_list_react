@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import {Button} from './Button';
+
+import { Button } from './Button';
 
 interface ITodoListTitle {
   editMode: boolean;
@@ -8,7 +9,7 @@ interface ITodoListTitle {
   updateTitle: any;
   onDelete: any;
 
-}
+};
 
 class TodoListTitle extends React.Component<ITodoListTitle> {
   state = {
@@ -44,8 +45,7 @@ class TodoListTitle extends React.Component<ITodoListTitle> {
         }
       </>
     );
-  }
-}
+  };
+};
 
 export default TodoListTitle;
-

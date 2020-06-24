@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import {Button} from './Button';
+
+import { Button } from './Button';
 
 interface IProps {
   task: any;
@@ -8,7 +9,7 @@ interface IProps {
   changeStatus: any;
   changeTitle: any;
   deleteTask: any;
-}
+};
 
 class TodoListTask extends React.Component<IProps> {
 
@@ -60,7 +61,7 @@ class TodoListTask extends React.Component<IProps> {
         break;
       default:
         priorityTitle = "Low";
-    }
+    };
 
     return (
       <section className={containerCssClass}>
@@ -87,8 +88,7 @@ class TodoListTask extends React.Component<IProps> {
         </label>
       </section>
     );
-  }
-}
+  };
+};
 
 export default TodoListTask;
-

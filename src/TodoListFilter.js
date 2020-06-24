@@ -1,6 +1,7 @@
 import React from 'react';
 import '../src/App.css';
-import {Button} from './Button';
+
+import { Button } from './Button';
 
 class TodoListFilter extends React.Component {
 
@@ -39,8 +40,7 @@ class TodoListFilter extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  };
+};
 
 export default TodoListFilter;
-
