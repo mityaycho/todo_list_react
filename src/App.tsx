@@ -2,8 +2,9 @@ import React from 'react';
 import './App.css';
 import TodoList from './TodoList';
 import AddNewItemForm from './AddNewItemForm';
-import {connect} from 'react-redux';
-import {addTodolistTC, loadTodolistsTC} from './reducer';
+
+import { connect } from 'react-redux';
+import { addTodolistTC, loadTodolistsTC } from './reducer';
 
 
 interface IProps {
@@ -60,11 +61,11 @@ const mapDispatchToProps = (dispatch: any) => {
     },
     addTodolist: (title: string) => {
       const action = addTodolistTC(title);
-      dispatch(action)
+      dispatch(action);
     }
   }
 };
 
 const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
-export default ConnectedApp;
 
+export default ConnectedApp;
