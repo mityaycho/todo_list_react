@@ -48,10 +48,9 @@ class AddNewItemForm extends React.Component {
         />
         <Button className="universe-button" title="add" onClick={this.onAddItemClick}/>
       </div>
-
     );
-  }
-}
+  };
+};
 
 export default AddNewItemForm;
 
