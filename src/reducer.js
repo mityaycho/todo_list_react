@@ -31,6 +31,7 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+
     case SET_TASKS:
       return {
         ...state,
@@ -38,25 +39,29 @@ const reducer = (state = initialState, action) => {
           if (tl.id !== action.todolistId) {
             return tl;
           } else {
-            return {...tl, tasks: action.tasks}
+            return {...tl, tasks: action.tasks};
           }
         })
-      };
+			};
+			
     case SET_TODOLISTS:
       return {
         ...state,
         todolists: action.todolists.map(tl => ({...tl, tasks: []}))
-      };
+			};
+			
     case ADD_TODOLIST:
       return {
         ...state,
         todolists: [...state.todolists, action.newTodolist]
-      };
+			};
+			
     case DELETE_TODOLIST:
       return {
         ...state,
         todolists: state.todolists.filter(tl => tl.id !== action.todolistId)
-      };
+			};
+			
     case UPDATE_TODOLIST_TITLE:
       return {
         ...state,
@@ -64,7 +69,8 @@ const reducer = (state = initialState, action) => {
           if (tl.id !== action.todolistId) return tl;
           else return {...tl, title: action.title}
         })
-      };
+			};
+			
     case DELETE_TASK:
       return {
         ...state,
@@ -73,23 +79,25 @@ const reducer = (state = initialState, action) => {
             return {
               ...tl,
               tasks: tl.tasks.filter(t => t.id !== action.taskId)
-            }
+            };
           } else {
-            return tl
+            return tl;
           }
         })
-      };
+			};
+			
     case ADD_TASK:
       return {
         ...state,
         todolists: state.todolists.map(tl => {
           if (tl.id === action.todolistId) {
-            return {...tl, tasks: [...tl.tasks, action.newTask]}
+            return {...tl, tasks: [...tl.tasks, action.newTask]};
           } else {
-            return tl
+            return tl;
           }
         })
-      };
+			};
+			
     case UPDATE_TASK:
       return {
         ...state,
@@ -104,14 +112,15 @@ const reducer = (state = initialState, action) => {
                   return {...t, ...action.obj};
                 }
               })
-            }
+            };
           } else {
-            return tl
+            return tl;
           }
         })
-      };
+			};
+			
     default:
-      return state
+      return state;
   };
 };
 
